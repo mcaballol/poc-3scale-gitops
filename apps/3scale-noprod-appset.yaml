@@ -26,7 +26,7 @@ spec:
       source:
         path: overlays/noprod/3scale
         repoURL: https://github.com/mcaballol/poc-3scale-gitops.git
-        targetRevision: master
+        targetRevision: main
       syncPolicy:
         automated:
           prune: true
