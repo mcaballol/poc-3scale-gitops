@@ -22,6 +22,12 @@ spec:
       destination:
         namespace: 3scale
         server: '{{server}}'
+      ignoreDifferences:
+      - group: operators.coreos.com
+        jsonPointers:
+        - /spec/installPlanApproval
+        - /spec/startingCSV
+        kind: Subscription
       project: 3scale-noprod
       source:
         path: overlays/noprod/3scale
