@@ -14,7 +14,7 @@ spec:
   - list:
       elements:
       - name: noprod
-        server: https://api.cluster-6wm5h.6wm5h.sandbox2255.opentlc.com:6443
+        server: https://kubernetes.default.svc
   template:
     metadata:
       name: 3scale-{{name}}
