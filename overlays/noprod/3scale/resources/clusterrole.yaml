@@ -1,0 +1,539 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 3scale-operator-ns-admin
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - ''
+      - coordination.k8s.io
+    resources:
+      - configmaps
+      - leases
+  - verbs:
+      - get
+      - update
+      - patch
+    apiGroups:
+      - ''
+    resources:
+      - configmaps/status
+  - verbs:
+      - create
+      - patch
+    apiGroups:
+      - ''
+    resources:
+      - events
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps
+    resources:
+      - daemonsets
+      - deployments
+      - replicasets
+      - statefulsets
+  - verbs:
+      - update
+    apiGroups:
+      - apps
+    resources:
+      - deployments/finalizers
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagerbackups
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagerbackups/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagerbackups/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagerrestores
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagerrestores/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagerrestores/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagers
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagers/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - apps.3scale.net
+    resources:
+      - apimanagers/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - apps.openshift.io
+    resources:
+      - deploymentconfigs
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - batch
+    resources:
+      - jobs
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - activedocs
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - activedocs/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - backends
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - backends/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - backends/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - custompolicydefinitions
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - custompolicydefinitions/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - developeraccounts
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - developeraccounts/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - developeraccounts/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - developerusers
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - developerusers/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - developerusers/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - openapis
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - openapis/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - openapis/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - products
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - products/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - products/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - tenants
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - tenants/finalizers
+  - verbs:
+      - get
+      - patch
+      - update
+    apiGroups:
+      - capabilities.3scale.net
+    resources:
+      - tenants/status
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - configmaps
+      - endpoints
+      - events
+      - persistentvolumeclaims
+      - pods
+      - replicationcontrollers
+      - secrets
+      - serviceaccounts
+      - services
+      - services/finalizers
+  - verbs:
+      - create
+    apiGroups:
+      - ''
+    resources:
+      - pods/exec
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - image.openshift.io
+    resources:
+      - imagestreams
+      - imagestreams/layers
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+    apiGroups:
+      - image.openshift.io
+    resources:
+      - imagestreamtags
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - update
+      - watch
+    apiGroups:
+      - integreatly.org
+    resources:
+      - grafanadashboards
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - update
+      - watch
+    apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - podmonitors
+      - prometheusrules
+      - servicemonitors
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - rolebindings
+      - roles
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - route.openshift.io
+    resources:
+      - routes
+  - verbs:
+      - create
+    apiGroups:
+      - route.openshift.io
+    resources:
+      - routes/custom-host
+  - verbs:
+      - get
+    apiGroups:
+      - route.openshift.io
+    resources:
+      - routes/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - namespaces

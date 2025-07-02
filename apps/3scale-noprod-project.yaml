@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: 3scale-noprod
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*' 
+  roles:
+    - description: Administradores Gitops
+      groups:
+        - redhat
+        - gitops
+      name: gitops-admin
+      policies:
+        - 'p, proj:3scale-noprod:gitops-admin, applications, get, 3scale-noprod/*, allow'
+        - 'p, proj:3scale-noprod:gitops-admin, applications, create, 3scale-noprod/*, allow'
+        - 'p, proj:3scale-noprod:gitops-admin, applications, update, 3scale-noprod/*, allow'
+    - description: Operadores Gitops
+      groups:
+        - developer
+      name: gitops-viewer
+      policies:
+        - 'p, proj:3scale-noprod:gitops-viewer, applications, get, 3scale-noprod/*, allow'

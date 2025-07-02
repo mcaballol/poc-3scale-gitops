@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+#bases:
+#  - ../../../base-operator-apicast
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+- name: token-apicast-staging
+  envs:
+  - env/token-secret.env
+- name: token-apicast-production
+  envs:
+  - env/token-secret.env
+
+#patches:
+#- patch: |-
+#    - op: add
+#      path: /spec/targetNamespaces/-
+#      value: 3scale-apicast-dev
+#  target:
+#    group: operators.coreos.com
+#    kind: OperatorGroup
+#    name: 3scale-apicast
+#    version: v1
+
+
+resources: 
+- resources/apicast-instance-staging.yaml
+- resources/apicast-instance-production.yaml
+- resources/apicast-instance-lazy.yaml
+

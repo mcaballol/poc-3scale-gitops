@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-minio-bucket
+spec:
+  template:
+    spec:
+      containers:
+      - name: bucket-creator
+        env:
+        - name: S3_ENDPOINT
+          value: http://minio:9000 
+        - name: S3_BUCKET
+          value: 3scale-system-storage

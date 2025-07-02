@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+#bases:
+#  - ../../../base-operator
+configurations:
+  - config.yaml
+
+resources: 
+- resources/3scale-instance.yaml
+- resources/secret-s3-auth.yaml
+- resources/clusterrole.yaml
+
+# Dev Tenant 
+- resources/tenant-dev/dev-tenant-namespace.yaml
+- resources/tenant-dev/dev-admin-secret.yaml
+- resources/tenant-dev/dev-tenant.yaml
+
+
+vars:
+  - name: DOMAIN
+    objref:
+      apiVersion: apps.3scale.net/v1alpha1
+      kind: APIManager
+      name: apimanager
+    fieldref:
+      fieldpath: spec.wildcardDomain
+
+

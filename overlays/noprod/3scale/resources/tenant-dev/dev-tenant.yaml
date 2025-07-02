@@ -1,0 +1,22 @@
+apiVersion: capabilities.3scale.net/v1alpha1
+kind: Tenant
+metadata:
+  name: 3scale-dev
+  namespace: 3scale-dev
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    insecure_skip_verify: true
+spec:
+  username: admin
+  systemMasterUrl: https://master.$(DOMAIN)
+  email: admin@ecorp.com
+  organizationName: 3scale-dev
+  masterCredentialsRef:
+    name: system-seed
+    namespace: 3scale
+  passwordCredentialsRef:
+    name: dev-admin-secret
+  tenantSecretRef:
+    name: dev-tenant-secret
+    

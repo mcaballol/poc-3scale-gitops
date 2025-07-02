@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: 3scale-noprod
+  namespace: openshift-gitops
+spec:
+  generators:
+  # - clusterDecisionResource:
+  #     configMapRef: acm-placement
+  #     labelSelector:
+  #       matchLabels:
+  #         cluster.open-cluster-management.io/placement: gitops-noprod-clusters
+  #     requeueAfterSeconds: 180
+  - list:
+      elements:
+      - name: noprod
+        server: https://api.cluster-6wm5h.6wm5h.sandbox2255.opentlc.com:6443
+  template:
+    metadata:
+      name: 3scale-{{name}}
+    spec:
+      destination:
+        namespace: 3scale
+        server: '{{server}}'
+      project: 3scale-noprod
+      source:
+        path: overlays/noprod/3scale
+        repoURL: https://github.com/mcaballol/poc-3scale-gitops.git
+        targetRevision: master
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: false

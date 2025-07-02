@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-minio-bucket
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: bucket-creator
+        image: quay.io/minio/mc
+        env:
+        - name: MC_CONFIG_DIR
+          value: /tmp/.mc
+        - name: S3_ENDPOINT
+          value: http://my-minio:9000  # Servicio MinIO en el mismo namespace
+        - name: S3_BUCKET
+          value: my-bucket  # Cambia por el nombre de tu bucket
+        - name: S3_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio  # Nombre del Secret con las claves
+              key: minio_root_user
+        - name: S3_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: minio_root_password
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "[INFO] Esperando hasta 5 minutos a que MinIO esté disponible..."
+
+          TIMEOUT=300
+          INTERVAL=10
+          ELAPSED=0
+
+          while [ $ELAPSED -lt $TIMEOUT ]; do
+            if mc alias set minio "$S3_ENDPOINT" "$S3_ACCESS_KEY" "$S3_SECRET_KEY"; then
+              echo "[INFO] MinIO disponible tras $ELAPSED segundos."
+              break
+            fi
+            sleep $INTERVAL
+            ELAPSED=$((ELAPSED + INTERVAL))
+          done
+
+          if [ $ELAPSED -ge $TIMEOUT ]; then
+            echo "[ERROR] Timeout: MinIO no respondió en $TIMEOUT segundos."
+            exit 1
+          fi
+
+          echo "[INFO] Creando bucket '$S3_BUCKET'..."
+          mc mb --ignore-existing minio/"$S3_BUCKET"
+
+          echo "[INFO] Bucket '$S3_BUCKET' creado o ya existía."

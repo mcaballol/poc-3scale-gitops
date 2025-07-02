@@ -1,0 +1,22 @@
+---
+apiVersion: apps.3scale.net/v1alpha1
+kind: APIcast
+metadata:
+  annotations:
+    apicast.apps.3scale.net/operator-version: 0.8.0
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: lazy
+spec:
+  adminPortalCredentialsRef:
+    name: token-apicast-production
+  configurationLoadMode: lazy
+  deploymentEnvironment: staging
+  replicas: 1
+  timezone: America/Santiago
+  logLevel: info
+  openSSLPeerVerificationEnabled: false
+  cacheConfigurationSeconds: 10
+  managementAPIScope: status
+  responseCodesIncluded: false
+  pathRoutingEnabled: false
