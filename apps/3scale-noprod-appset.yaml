@@ -4,6 +4,8 @@ metadata:
   name: 3scale-noprod
   namespace: openshift-gitops
 spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: false
   generators:
   # - clusterDecisionResource:
   #     configMapRef: acm-placement
@@ -37,3 +39,4 @@ spec:
         automated:
           prune: true
           selfHeal: false
+        preserveResourcesOnDeletion: false
