@@ -9,7 +9,7 @@ metadata:
     insecure_skip_verify: true
 spec:
   username: admin
-  systemMasterUrl: https://master.$(DOMAIN)
+  systemMasterUrl: https://master.apps.cluster-gmdqx.dynamic.redhatworkshops.io
   email: admin@ecorp.com
   organizationName: 3scale-dev
   masterCredentialsRef:
